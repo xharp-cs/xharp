@@ -1,0 +1,8 @@
+bin
+iso_root
+obj
+limine
+xharp.obj
+startup.obj
+xharp.obj.i64
+kernel.iso

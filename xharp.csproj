@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <RuntimeMetadataVersion>v4.2.0</RuntimeMetadataVersion>
+    <PublishAot>true</PublishAot>
+
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+    
+    <IlcDisableReflection>true</IlcDisableReflection>
+    <IlcGenerateMetadataLog>false</IlcGenerateMetadataLog>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+    
+    <IlcInstructionSet>native</IlcInstructionSet>
+    <IlcSystemModule></IlcSystemModule>
+    <PublishAotUsingRuntimePack>false</PublishAotUsingRuntimePack>
+    <IlcTreatWarningsAsErrors>false</IlcTreatWarningsAsErrors>
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+    <IlcSingleWarn>false</IlcSingleWarn>
+
+    <IlcDisableRuntimeLibrary>true</IlcDisableRuntimeLibrary>
+
+  </PropertyGroup>
+
+  <Target Name="CustomizeReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
+    <ItemGroup>
+      <ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
+      <ReferencePath Remove="@(ReferencePath)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveFrameworkReferences" BeforeTargets="IlcCompile">
+    <ItemGroup>
+      <ManagedBinary Remove="@(ManagedBinary)" />
+      <ManagedBinary Include="$(IntermediateOutputPath)$(TargetName)$(TargetExt)" />
+      <FrameworkAssemblies Remove="@(FrameworkAssemblies)" />
+      <PrivateSdkAssemblies Remove="@(PrivateSdkAssemblies)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CustomIlcArgs" BeforeTargets="WriteIlcRspFileForCompilation">
+    <ItemGroup>
+      <IlcArg Remove="--initassembly:System.Private.CoreLib" />
+      <IlcArg Remove="--initassembly:System.Private.StackTraceMetadata" />
+      <IlcArg Remove="--initassembly:System.Private.TypeLoader" />
+      <IlcArg Remove="--initassembly:System.Private.Reflection.Execution" />
+      <IlcArg Remove="--initassembly:System.Private.DisabledReflection" />
+      
+      <IlcArg Remove="--feature:System.Diagnostics.Debugger.IsSupported=false" />
+      <IlcArg Include="--singlewarn+" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CreateMinimalIlcRsp" AfterTargets="WriteIlcRspFileForCompilation">
+    <PropertyGroup>
+      <IlcRspFile>$(NativeIntermediateOutputPath)$(TargetName).ilc.rsp</IlcRspFile>
+    </PropertyGroup>
+    
+    <Message Text="Using ILC response file: $(IlcRspFile)" Importance="high" />
+  </Target>
+
+  <Target Name="RemoveHostConfigurationOptions" BeforeTargets="WriteIlcRspFileForCompilation" DependsOnTargets="PrepareForILLink">
+    <ItemGroup>
+      <RuntimeHostConfigurationOption Remove="@(RuntimeHostConfigurationOption)" />
+    </ItemGroup>
+  </Target>
+</Project>
