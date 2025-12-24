@@ -13,13 +13,14 @@ ilc bin/Release/net9.0/linux-x64/xharp.dll \
     --verbose
 
 clang -c startup.S -o startup.obj -target x86_64-unknown-linux -ffreestanding
-
+clang -c src/Include/main.c -o c.obj -target x86_64-unknown-linux -ffreestanding
 ld.lld \
     -T linker.ld \
     -e _start \
     --build-id=none \
     -nostdlib \
     -o kernel.elf \
+    c.obj \
     startup.obj xharp.obj
 
 mv kernel.elf iso_root/boot/kernel.elf

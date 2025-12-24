@@ -1,10 +1,22 @@
 .section .text
 .global _start
 
+
 _start:
-    mov $0x200000, %rsp 
+    .intel_syntax noprefix
+    mov rsp, 0x200010 
+
+    mov rax, cr0
+    and ax, 0xFFFB
+    or  ax, 0x2
+    mov cr0, rax
+
+    mov rax, cr4
+    or  eax, 3 << 9
+    mov cr4, rax
+
     call xharp_Program__KernelMain
-    jmp .hang
+
     
 .hang:
     cli
