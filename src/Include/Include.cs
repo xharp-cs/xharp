@@ -7,14 +7,14 @@ namespace Include;
 class ASM
 {
     [DoesNotReturn]
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public static extern void hcf();
+    [DllImport("*", EntryPoint = "Hcf")]
+    public static extern void Hcf();
 }
 
 class Limine
 {
     
-    public unsafe struct FramebufferInfo
+    public unsafe struct Framebuffer
     {
         public void* Address;
         public ulong Width;
@@ -23,7 +23,7 @@ class Limine
         public ushort Bpp;
     }
 
-    [MethodImpl(MethodImplOptions.InternalCall)]
-    public unsafe static extern FramebufferInfo* GetFramebuffer();
+    [DllImport("*", EntryPoint = "GetFramebuffer")]
+    public unsafe static extern Framebuffer* GetFramebuffer();
 
 }

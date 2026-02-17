@@ -21,8 +21,7 @@ ilc bin/Release/net9.0/linux-x64/xharp.dll \
     --out xharp.obj \
     --targetos linux \
     --targetarch x64 \
-    --singlemethodtypename Program \
-    --singlemethodname KernelMain \
+    --nativelib \
     --verbose
 # Compiling plugs and c-bridges
 clang -c startup.S -o startup.obj -target x86_64-unknown-linux -ffreestanding

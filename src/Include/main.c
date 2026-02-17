@@ -1,15 +1,15 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include <limine.h>
+#include "../limine.h"
 
 __attribute__((used, section(".limine_requests")))
 static volatile struct limine_framebuffer_request fb_req = {
-    .id = LIMINE_FRAMEBUFFER_REQUEST,
+    .id = LIMINE_FRAMEBUFFER_REQUEST_ID,
     .revision = 0
 };
 
-struct fb_info {
+struct Fb {
     void* addr;
     uint64_t width;
     uint64_t height;
@@ -17,10 +17,10 @@ struct fb_info {
     uint16_t bpp;
 };
 
-static struct fb_info fb;
+static struct Fb fb;
 
-struct fb_info*
-xharp_Include_Limine__GetFramebuffer(void)
+struct Fb*
+GetFramebuffer(void)
 {
     if (!fb_req.response || fb_req.response->framebuffer_count < 1)
         return 0;
@@ -35,10 +35,16 @@ xharp_Include_Limine__GetFramebuffer(void)
 
     return &fb;
 }
+
 __attribute__((noreturn))
-void xharp_Include_ASM__hcf(void)
+void Hcf(void)
 {
     for (;;) {
         asm volatile ("hlt");
     }
 }
+
+static volatile struct limine_module_request module_request = {
+    .id = LIMINE_MODULE_REQUEST_ID,
+    .revision = 0
+};

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Include;
+using Utils;
 
 public class Program : System.Object
 {
@@ -12,19 +13,16 @@ public class Program : System.Object
     [System.Runtime.InteropServices.UnmanagedCallersOnly(EntryPoint = "KernelEntry", CallConvs = new[] { typeof(CallConvCdecl) })]
     public static unsafe int KernelMain(ulong boot_info_address)
     {
-        Limine.FramebufferInfo* framebuffer = Limine.GetFramebuffer();
+        Limine.Framebuffer* framebuffer = Limine.GetFramebuffer();
         if (framebuffer == null)
-            ASM.hcf();
+            ASM.Hcf();
+
+        Graphics.Init(framebuffer);
 
         for (ulong i = 0; i < 100; i++) {
-            uint* fb_ptr = (uint*)framebuffer->Address;
-            fb_ptr[i * (framebuffer->Pitch/ 4) + i] = 0xffffff;
-            fb_ptr[i * (framebuffer->Pitch/ 4) + i+10] = 0xffffff;
-            fb_ptr[i * (framebuffer->Pitch/ 4) + i+20] = 0xffffff;
-            fb_ptr[i * (framebuffer->Pitch/ 4) + i+30] = 0xffffff;
-            fb_ptr[i * (framebuffer->Pitch/ 4) + i+40] = 0xffffff;
+            Graphics.PutPixel(i,i,0xffffff);
         }
-        ASM.hcf();
+        ASM.Hcf();
 
         return 0;
     }
