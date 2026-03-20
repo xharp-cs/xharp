@@ -40,4 +40,10 @@ namespace System.Reflection
     public abstract class Assembly : ICustomAttributeProvider, Runtime.Serialization.ISerializable { public virtual object[] GetCustomAttributes(Type attributeType, bool inherit) { return null; } }
 
     public abstract class MemberInfo : Object, ICustomAttributeProvider {}
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    public sealed class DefaultMemberAttribute : Attribute
+    {
+        public DefaultMemberAttribute(string memberName) { }
+    }
 }

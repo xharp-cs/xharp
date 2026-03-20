@@ -33,6 +33,17 @@ namespace System.Runtime.InteropServices
         Unicode = 3
     }
 
+    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
+    public sealed class FieldOffsetAttribute : Attribute
+    {
+        public FieldOffsetAttribute(int offset)
+        {
+            Value = offset;
+        }
+
+        public int Value { get; }
+    }
+
     public abstract class CriticalHandle : IDisposable
     {
         protected CriticalHandle(IntPtr invalidHandleValue) { }

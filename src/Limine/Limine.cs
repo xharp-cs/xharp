@@ -1,19 +1,11 @@
+using System;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Include;
-
-class ASM
-{
-    [DoesNotReturn]
-    [DllImport("*", EntryPoint = "Hcf")]
-    public static extern void Hcf();
-}
+namespace LimineBootloader;
 
 class Limine
 {
-    
+
     public unsafe struct Framebuffer
     {
         public void* Address;
@@ -26,4 +18,16 @@ class Limine
     [DllImport("*", EntryPoint = "GetFramebuffer")]
     public unsafe static extern Framebuffer* GetFramebuffer();
 
+    public unsafe struct File
+    {
+        public nint Name;
+        public UInt64 Revision;
+        public void* Address;
+        public UInt64 Size;
+        public nint Path;
+        public nint String;
+    }
+
+    [DllImport("*", EntryPoint = "GetFont")]
+    public unsafe static extern File* GetFont();
 }

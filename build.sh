@@ -24,8 +24,11 @@ ilc bin/Release/net9.0/linux-x64/xharp.dll \
     --nativelib \
     --verbose
 # Compiling plugs and c-bridges
-clang -c startup.S -o startup.obj -target x86_64-unknown-linux -ffreestanding
-clang -c src/Include/main.c -o c.obj -target x86_64-unknown-linux -ffreestanding
+clang -c src/Limine/limine.c -o c.obj -target x86_64-unknown-linux -ffreestanding
+clang -c src/Utils/IO/io.c -o io.obj -target x86_64-unknown-linux -ffreestanding
+
+clang -c src/startup.S -o startup.obj -target x86_64-unknown-linux -ffreestanding
+clang -c src/Utils/ASM/plug.S -o plug.obj -target x86_64-unknown-linux -ffreestanding
 # Linking
 ld.lld \
     -T linker.ld \
@@ -34,7 +37,7 @@ ld.lld \
     -nostdlib \
     -o kernel.elf \
     c.obj \
-    startup.obj xharp.obj
+    startup.obj plug.obj io.obj xharp.obj
 # Moving to iso_root dir
 mv kernel.elf iso_root/boot/kernel.elf
 # Making .iso

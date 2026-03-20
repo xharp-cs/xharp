@@ -1,9 +1,9 @@
+.intel_syntax noprefix
+
 .section .text
 .global _start
 
-
 _start:
-    .intel_syntax noprefix
     mov rsp, 0x200010 
 
     mov rax, cr0
@@ -47,5 +47,14 @@ RhpFallbackFailFast:
 __security_cookie:
     ret 
 
+.global RhpNewArray
+RhpNewArray:
+    ret
+
+.global RhpAssignRef
+RhpAssignRef:
+    ret
+
+    
 .global xharp_System_Runtime_CompilerServices_RuntimeHelpers__get_OffsetToStringData
 .global IntPtr__ToPointer

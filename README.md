@@ -1,7 +1,7 @@
 # Xharp - simple C# kernel
 ### **Status**: *early active development*
 ## About
-Xharp is not a *standart* project. Feature of this projects is C# like a *primary language* for bare metal programming.
+Primary language of this kernel is c#.
 It works using a [NativeAOT technology](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/).
 
 The compilation process goes like this:
@@ -23,7 +23,7 @@ The compilation process goes like this:
 
 - [Clang](https://clang.llvm.org)
 - [ld.lld](https://lld.llvm.org/)
-- [Xorisso](https://www.gnu.org/software/xorriso/)
+- [Xorriso](https://www.gnu.org/software/xorriso/)
 - [Git](https://git-scm.com/)
 - *Optional:* [QEMU](https://www.qemu.org/)
 
@@ -33,4 +33,4 @@ The compilation process goes like this:
 
 ## Running
 - QEMU(Recommended)
-    - Run: `qemu-system-x86_64 kernel.iso`
+    - Run: `qemu-system-x86_64 out/kernel.iso`

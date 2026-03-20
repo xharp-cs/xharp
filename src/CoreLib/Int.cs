@@ -7,6 +7,13 @@ namespace System
     public struct IntPtr
     {
         public static readonly IntPtr Zero;
+        public static explicit operator IntPtr(int value) => (nint)value;
+
+        public static explicit operator IntPtr(long value) => checked((nint)value);
+
+        public static unsafe explicit operator IntPtr(void* value) => (nint)value;
+        public static nint Add(nint pointer, int offset) => pointer + offset;
+        public static nint Subtract(nint pointer, int offset) => pointer - offset;
         private readonly nint _value;
 
         public IntPtr(int value) { }

@@ -1,4 +1,5 @@
 using System;
+using Utils;
 namespace System
 {
     public class Object
@@ -58,7 +59,9 @@ namespace System
     public struct Boolean { }
     public struct Void { }
 
+    public readonly struct Double {}
     public readonly struct Byte { }
+    public readonly struct SByte { }
     public readonly struct Char { }
 
     public abstract class Array : Object
@@ -68,12 +71,18 @@ namespace System
         private int _length;
     }
 
-    public class String
+    public unsafe class String
     {
-        public String() { }
-        public int Length { get; }
+        public char* Ptr;
+        public int Length;
+        
+        public unsafe char* GetRaw()
+        {
+            return Ptr;
+        }
     }
-    
+
+
     public interface IDisposable { void Dispose(); }
 
     namespace System.Runtime.Serialization { }
