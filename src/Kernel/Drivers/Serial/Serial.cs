@@ -48,6 +48,15 @@ class Serial
         Io.OutB((ushort)port, (byte)value);
     }
 
+    public unsafe static void Write(char* value)
+    {
+        while (IsTransmitEmpty()==0);
+        for (int i = 0; i < Helper.GetLengthOfCharPtr(value); i++)
+        {
+            Io.OutB((ushort)port, (byte)value[i]);
+        }
+    }
+
     public unsafe static void Write(String value)
     {
         while (IsTransmitEmpty()==0);
@@ -59,5 +68,7 @@ class Serial
             }
         }
     }
+
+    public unsafe static void WriteLine(String value){Write(value); Io.OutB((ushort)port, 0x0A);}
 
 }

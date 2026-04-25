@@ -5,5 +5,7 @@ namespace Internal.Runtime.CompilerHelpers
         void ThrowInvalidProgramException(){}
         void ThrowInvalidProgramExceptionWithArgument(){}
         void ThrowIndexOutOfRangeException() {}
+        void ThrowTypeLoadException() {}
+        void ThrowTypeLoadExceptionWithArgument() {}
     }
 }

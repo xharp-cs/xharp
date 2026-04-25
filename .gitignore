@@ -1,3 +1,4 @@
+tmp
 bin
 iso_root
 obj
@@ -6,7 +7,6 @@ xharp.obj
 startup.obj
 xharp.obj.i64
 kernel.iso
-c.obj
 kernel.iso.i64
 xharp.obj.id0
 xharp.obj.id1
@@ -14,4 +14,3 @@ xharp.obj.id2
 xharp.obj.nam
 xharp.obj.til
 out
-src/Utils/PSF/PSF.cs

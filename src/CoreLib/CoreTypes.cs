@@ -71,6 +71,8 @@ namespace System
         private int _length;
     }
 
+    public abstract class Array<T>{}
+
     public unsafe class String
     {
         public char* Ptr;

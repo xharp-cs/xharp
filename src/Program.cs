@@ -15,18 +15,13 @@ public class Program : System.Object
         Console.SetUp();
         Console.WriteLine("[-] Serial init...");
         Serial.Init(0x3f8);
-        Serial.Write("Serial initalized on COM1(0x3f8).");
+        Serial.WriteLine("Serial initalized on COM1(0x3f8). ");
         Console.WriteLine("[OK] Serial init");
-        /*
-        Console.WriteLine("This text is written by write2 method!");
-        Console.WriteLine("Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz.");
-        Console.WriteLine(10);     
-        Console.WriteLine(0xffffffffffffffff);
-        */
+        Console.WriteLine("[-] Gdt init...");
+        Gdt.SetUp();
+        Serial.WriteLine("GDT Init - OK. ");
+        Console.WriteLine("[OK] GDT init");
 
-        ASM.Hcf();
-
-
-        return 0;
+        while(true) ASM.Hcf();
     }
 }

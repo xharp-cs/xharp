@@ -9,13 +9,11 @@ public class Console
 {
     static ulong xConsole;
     static ulong yConsole;
+    static bool serial;
 
     public static void SetUp()
     {
-        // setup offset
         xConsole=10;yConsole=10;
-
-        // there something another will be
     }
 
     public static void Write(String value, int fgColor=0xffffff, int bgColor=0x000000)

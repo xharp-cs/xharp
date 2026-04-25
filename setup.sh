@@ -14,3 +14,4 @@ cp -v limine/BOOTX64.EFI iso_root/EFI/BOOT/
 cp -v limine/BOOTIA32.EFI iso_root/EFI/BOOT/
 
 mkdir out
+mkdir tmp

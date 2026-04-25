@@ -1,5 +1,3 @@
-.intel_syntax noprefix
-
 .section .text
 .global _start
 
@@ -46,10 +44,6 @@ RhpFallbackFailFast:
 .global __security_cookie
 __security_cookie:
     ret 
-
-.global RhpNewArray
-RhpNewArray:
-    ret
 
 .global RhpAssignRef
 RhpAssignRef:

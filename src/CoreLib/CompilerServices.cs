@@ -33,4 +33,15 @@ namespace System.Runtime.CompilerServices
         public static ref TTo As<TFrom, TTo>(ref TFrom source) => 
             ref Runtime.CompilerServices.Unsafe.As<TFrom, TTo>(ref source);
     }
+
+    [AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
+    public sealed class InlineArrayAttribute : Attribute
+    {
+        public InlineArrayAttribute(int length)
+        {
+            Length = length;
+        }
+
+        public int Length { get; }
+    }
 }

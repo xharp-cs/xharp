@@ -111,4 +111,6 @@ namespace System.Runtime.InteropServices
         Explicit = 2,
         Sequential = 0
     }
+
+    public enum UnmanagedType {}
 }
